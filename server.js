@@ -32,6 +32,7 @@ io.on('connection' ,(socket) => {
         socket.join(data.username)  // I will make socket join this room
         socket.emit('logged_in') // Send this event back to client. // When we click o start Logged in msg sent back to client and also chat box will be show and loginbox hides.
       }
+      console.log(users) //see the state on teh server.
     })
     // In my Server side script
     socket.on('msg_send' ,(data) => { // if I found msg_send we return teh data
