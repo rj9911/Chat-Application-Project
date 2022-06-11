@@ -26,5 +26,6 @@ Like a Facebook Messenger.
   We will not trust what the client says we hv to check from server side.
 
  # Conclusions
- This is how websocket works using Socket.io . This is not a production ready code as there are security concerns in this. 
+ This is how websocket works using Socket.io . This is not a production ready code as there are security concerns in this.
+ Now we made an APP where we hv secured log in , and we can talk to persons which are logged in.
 

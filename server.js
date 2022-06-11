@@ -4,6 +4,7 @@ const http = require('http')
 const express = require('express')
 const app = express()
 const socketio = require('socket.io')
+const { SocketAddress } = require('net')
 
 // Why we have written server?
 const server = http.createServer(app)
@@ -14,7 +15,7 @@ const io = socketio(server)
 let users = {
    'Priyam' : 'no%867'
 }
-let socketMap = {}
+let socketMap = {} // empty objectww
 
 io.on('connection' ,(socket) => {
     console.log('connected with socket id =' , socket.id)
@@ -43,6 +44,7 @@ io.on('connection' ,(socket) => {
     })
     // In my Server side script
     socket.on('msg_send' ,(data) => { // if I found msg_send we return teh data
+      data.from = socketMap[socket.id] // to from data is going meand senders username.
       if(data.to) { // If data.to exists then this if executed
          io.to(data.to).emit('msg_rcvd' ,data) // Send in this room (io.to)
       } else {
