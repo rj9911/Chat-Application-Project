@@ -18,6 +18,14 @@ io.on('connection' ,(socket) => {
       socket.join(data.username)  // I will make socket join this room
       socket.emit('logged_in') // Send this event back to client. // When we click o start Logged in msg sent back to client and also chat box will be show and loginbox hides.
     })
+    // In my Server side script
+    socket.on('msg_send' ,(data) => { // if I found msg_send we return teh data
+      if(data.to) { // If data.to exists then this if executed
+         io.to(data.to).emit('msg_rcvd' ,data) // Send in this room (io.to)
+      } else {
+        socket.broadcast.emit('msg_rcvd',data)
+      }
+    })
 })
 
 app.use('/' , express.static(__dirname + '/public'))

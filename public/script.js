@@ -25,3 +25,8 @@ $('#btnSendMsg').click(() => {
        // Client side Stuff
     })
 })
+
+socket.on('msg_rcvd',(data) => { // Whenevr i See this msg as 'msg_rcvd' we will get data on my client side. 
+    $('#ulMsgs').append($('<li>').text(data.msg))
+// whenever I see msg_rcvd we append li with text data.
+})
