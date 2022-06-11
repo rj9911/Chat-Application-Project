@@ -7,7 +7,8 @@ $('#chatBox').hide()
 
 $('#btnStart').click(() => {
     socket.emit('login' , {
-        username : $('#inpUsername').val()
+        username : $('#inpUsername').val() ,
+        password : $('#inpPassword').val() // when the login event happens these 2 things comes from client to server.
     })
     // Goto network tab and check the webSocket link you see the login with username.
 })
@@ -15,6 +16,9 @@ $('#btnStart').click(() => {
 socket.on('logged_in' , () => { // when this logged in event works
    $('#loginBox').hide()
    $('#chatBox').show()  // opposite works performed here hide the loginbox and show the chat box when logged in event happens.
+})
+socket.on('login_failed' , () => {
+    window.alert('Username or Password wrong')
 })
 
 $('#btnSendMsg').click(() => {

@@ -13,4 +13,7 @@ Like a Facebook Messenger.
 1. After Logged in ->
   You can send message to one person and also to all persons,
   using the above theory. We hv made two Btns in which one btn sends the msg to the specific person For eg. you hv to write : John ,so the msg would be sent to specific person only not to all the peron you have logged in.But if not written any name then by default the msg would be sent to all the persons that are logged in to that server.   
+2. Proper Password based Log in system ->
+  As we hv seen anybody can log from two Different names, we need to make system more secure.
+  When a person log in we expect him to give username as well password.
 
