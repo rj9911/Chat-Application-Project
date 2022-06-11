@@ -13,19 +13,10 @@ const io = socketio(server)
 
 io.on('connection' ,(socket) => {
     console.log('connected with socket id =' , socket.id)
-
-    socket.on('msg_send' , (data) => {  // here data is the messg that we typed in the input box will be received in terminal as mssg recieved + value enterd in input box.
-      //  console.log('received' , data.msg)
-      //io.emit('msg_rcvd' , data) // emit on io not on socket.
-      //socket.emit('msg_rcvd' , data) // emit on socket not on io.
-      socket.broadcast.emit('msg_rcvd' , data) // Broadcst done
-      // this means that msg send to every other socket except the current one(window)
-     // The difference between when emit is done on socket or io is :
-     // 1. When socket.emit happens,this means the msg we typed in input box is only remains in one window,and showed up in other window i.e msg send to its own socket.    
-     // 2. When io.emit happens,this means the msg we typed in input box is sent also in other windows and everyone can see that msg.    
-
-    // We want that msg should to everyone in the list. ->( io.emit )
-
+    
+    socket.on('login' , (data) => {
+      socket.join(data.username)  // I will make socket join this room
+      socket.emit('logged_in') // Send this event back to client. // When we click o start Logged in msg sent back to client and also chat box will be show and loginbox hides.
     })
 })
 

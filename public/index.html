@@ -6,15 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="jquery-3.6.0.js"></script>
     <script defer src="script.js"></script>
    <!-- defer means that script will be load after the DOM has been loaded -->
 </head>
 <body>
-    <h1>Socket.IO-sample</h1>
+    <h1>Socket.IO Chat Application</h1>
      
-    <input type="text" id="inpMsg">
-    <button id="btnSend">SEND</button>
+   <div id="loginBox">
+      <input id="inpUsername">
+      <button id="btnStart">START</button>
+   </div>
+   <div id="chatBox">
+    <input id="inpToUser" placeholder="Send to (default everyone)">
+    <input id="inpNewMsg" placeholder="New Message">
+    <button id="btnSendMsg">SEND</button>
+    <ul id="ulMsgs"></ul>
+   </div>
 
-    <ul id="ulMsgList"></ul>
 </body>
 </html>

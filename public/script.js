@@ -1,23 +1,27 @@
 // Frontend Code
 // This is for client side Doing Work
-let socket = io()    // io is a type of function that we get in socket variable
+let socket = io()
 
-// Create identifier for my frontend
+$('#loginBox').show()
+$('#chatBox').hide()
 
-let btnSend = document.getElementById('btnSend')
-let inpMsg = document.getElementById('inpMsg')
-let ulMsgList = document.getElementById('ulMsgList')
-
-btnSend.onclick = function() {
-    socket.emit('msg_send', { // Displayed this msg when this event happens
-      msg : inpMsg.value
-    }) 
-    inpMsg.value = ''  // Check in network section in inspect that now message is sent. if clicked on send
-}
-
-socket.on('msg_rcvd' , (data) => { // this whole thing enters the input box msg to the li box downside.
-    let liNewMsg = document.createElement('li')
-    liNewMsg.innerText = data.msg
-    ulMsgList.appendChild(liNewMsg)
+$('#btnStart').click(() => {
+    socket.emit('login' , {
+        username : $('#inpUsername').val()
+    })
+    // Goto network tab and check the webSocket link you see the login with username.
 })
 
+socket.on('logged_in' , () => { // when this logged in event works
+   $('#loginBox').hide()
+   $('#chatBox').show()  // opposite works performed here hide the loginbox and show the chat box when logged in event happens.
+})
+
+$('#btnSendMsg').click(() => {
+    socket.emit('msg_send', {
+       to : $('#inpToUser').val(),
+       msg : $('#inpNewMsg').val()
+       // This above is done to check to whom i have send the msg, & who send the msg.
+       // Client side Stuff
+    })
+})
