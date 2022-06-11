@@ -31,6 +31,10 @@ $('#btnSendMsg').click(() => {
 })
 
 socket.on('msg_rcvd',(data) => { // Whenevr i See this msg as 'msg_rcvd' we will get data on my client side. 
-    $('#ulMsgs').append($('<li>').text(data.msg))
+    $('#ulMsgs').append($('<li>')
+    //.text(data.msg))
+    .text(
+    `[${data.from}] : ${data.msg}`  // this way we wing show up in the frontend.
+    ))
 // whenever I see msg_rcvd we append li with text data.
 })

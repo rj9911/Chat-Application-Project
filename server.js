@@ -14,23 +14,30 @@ const io = socketio(server)
 let users = {
    'Priyam' : 'no%867'
 }
+let socketMap = {}
 
 io.on('connection' ,(socket) => {
     console.log('connected with socket id =' , socket.id)
+    
+    function login(s,u) { //s -> socket , u -> data.username
+        s.join(u) // I will make socket join this room if the password is correct
+         // I will make socket join this room
+        s.emit("logged_in") // Send this event back to client. // When we click o start Logged in msg sent back to client and also chat box will be show and loginbox hides. // Send this event back to client. // When we click o start Logged in msg sent back to client and also chat box will be show and loginbox hides.
+        socketMap[s.id] = u // in the socket map object array
+        console.log(socketMap)
+    }
     
     socket.on('login' , (data) => {
     // Key - value pairs
       if(users[data.username]){ // if ths data.username key exists
        if(users[data.username] == data.password){ // if that correct do the same thing
-        socket.join(data.username)  // I will make socket join this room if the password is correct
-        socket.emit('logged_in') // Send this event back to client. // When we click o start Logged in msg sent back to client and also chat box will be show and loginbox hides.
+          login(socket ,data.username)
        } else {
         socket.emit('login_failed') // log in failed if password is incorrect
        }
     }else {
         users[data.username] = data.password // if above thing doesn't happen then we see it's a new user, we add his new username with password.
-        socket.join(data.username)  // I will make socket join this room
-        socket.emit('logged_in') // Send this event back to client. // When we click o start Logged in msg sent back to client and also chat box will be show and loginbox hides.
+       login(socket , data.username) // we hv made function login as it will make my code easier.
       }
       console.log(users) //see the state on teh server.
     })
